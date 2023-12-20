@@ -1,6 +1,6 @@
 # Binomial-Options-Pricing-Model
 
-I've uploaded code for both the one-step core model and the multi-step model. The one-step model was simply a starting point and helped me understand exactly what was going on within the model. The multi-step model builds upon the foundational principles of the one-step model and extends it to a more complex and realistic scenario. The multi-step model allows for a more detailed simulation of option price evolution over time, providing a closer approximation to real-world option pricing dynamics.
+I've uploaded code for both the one-step core model and the multi-step model. The one-step model was simply a starting point and helped me understand exactly what was going on within the model. The multi-step model builds upon the foundational principles of the one-step model and extends it to a more complex and realistic scenario. The multi-step model allows for a more detailed simulation of option price evolution over time, providing a closer approximation to real-world option pricing dynamics. The model uses the 13-week treasury bill ^IRX to calculate the risk-free rate. The risk-free rate change is based on the timeframe, see the "get_risk_free_rate" function and "expiration_map" dictionary for more detail on when and how it changes.
 
 User Inputs:
 - Stock Ticker Symbol
