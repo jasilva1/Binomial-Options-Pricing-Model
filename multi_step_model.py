@@ -6,12 +6,14 @@ import matplotlib.pyplot as plt
 
 # Used for calculating Discount Factor 
 # risk free rate = rate of return of an investment with zero risk
-def get_risk_free_rate():
+def get_risk_free_rate(expiration):
     treasury_bill_symbol = '^IRX' # 13 week treasury bill currently about 5%
     treasury_bill = yf.Ticker(treasury_bill_symbol)
     # last close price
     latest_yield = treasury_bill.history(period="1d")['Close'].iloc[-1]
     risk_free_rate = latest_yield/100 #convert to decimal
+    if expiration < 1:
+        risk_free_rate = risk_free_rate * expiration
     return risk_free_rate
 
 def get_data(ticker_symbol):
@@ -33,13 +35,10 @@ def fetch_option_data(ticker_symbol):
     strike = list(options_data.calls['strike'])
     return current_price, options_data, strike
 
-def up_move(vol, t_step):
+def up_down_move(vol, t_step):
     u = (math.e)**(vol*math.sqrt(t_step))
-    return u
-
-def down_move(vol, t_step):
     d = (math.e)**(-vol*math.sqrt(t_step))
-    return d
+    return u, d
 
 def historical_data(ticker):
     historical_data = get_data(ticker)
@@ -115,21 +114,32 @@ def main():
 
     # Input fields for user parameters
     ticker = st.text_input("Stock Ticker Symbol(e.g. AMZN):", "AMZN")
-    steps = st.slider("Number of Steps:", min_value=1, max_value=100, value=6)
+    expiration_map = {
+        "2 Weeks": 2/52,
+        "1 Month": 1/12,
+        "3 Months": 3/12,
+        "6 Months": 0.5,
+        "1 Year": 1,
+        "2 Years": 2,
+        "3 Years": 3,
+        "5 Years": 5
+    }
+    expiration = st.selectbox("Choose the expiration Timeframe", ["2 Weeks", "1 Month", "3 Months", "6 Months", "1 Year", "2 Years", "3 Years", "5 Years"])
+    exp_mapped = expiration_map[expiration]
+    steps = st.slider("Number of Steps:", min_value=1, max_value=10000, value=6)
 
     if ticker:
         current_price, _ , strike_list = fetch_option_data(ticker)
         strike = st.selectbox("Select Strike Price:", strike_list)
         if st.button("Calculate Option Prices"):
-            if steps and strike_list:
+            if steps and strike_list and expiration:
                 try:
                     # Fetch data and calculate option price
                     vol = np.std(historical_data(ticker)) * np.sqrt(252)  # Annualize the volatility
-                    r = get_risk_free_rate()  # Risk-free rate
-                    t_step = 1 / steps  # Length of each time step
+                    r = get_risk_free_rate(exp_mapped)  # Risk-free rate
+                    t_step = exp_mapped / steps  # Length of each time step
 
-                    u = up_move(vol, t_step)
-                    d = down_move(vol, t_step)
+                    u, d = up_down_move(vol, t_step)
 
                     # Building the binomial tree for stock prices
                     stock_price_tree = build_binomial_tree(current_price, u, d, steps)
@@ -143,11 +153,11 @@ def main():
                     put_option_price = put_option_tree[0, 0]
                     st.success(f"The calculated Call option price is: ${call_option_price:.2f}")
                     st.success(f"The calculated Put option price is: ${put_option_price:.2f}")
-                    
-                    #Plotting binomial tree
-                    plt_tree = plot_binomial_tree(stock_price_tree)
-                    st.pyplot(plt_tree)
-            
+                    if steps < 100:
+                        #Plotting binomial tree
+                        plt_tree = plot_binomial_tree(stock_price_tree)
+                        st.pyplot(plt_tree)
+
                     # plotting historical data (closing prices)
                     plt_historical = plot_historical_data(ticker)
                     st.pyplot(plt_historical)
