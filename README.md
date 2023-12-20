@@ -1,13 +1,26 @@
 # Binomial-Options-Pricing-Model
 
 I've uploaded code for both the one-step core model I created, this was simply a starting point and helped me understand exactly what was going on within the model.
-I've also uploaded the code for the multi-step model. When run this allows you to enter a stock ticker symbol, an expiration time frame, number of steps, and strike price. 
-This model uses:
+I've also uploaded the code for the multi-step model, ...........................................................
+
+User Inputs:
+- Stock Ticker Symbol
+- Time till expiration
+- Number of Steps
+- Strike Price
+
+Outputs:
+- Calculated Call Option Price
+- Calculated Put Option Price
+- Stock Price Chart over the past 5 Years
+- Binomial Tree Visualization (If steps < 100)
+
+Libraries Used:
 - numpy
 - yfinance
 - math
 - streamlit
-https://www.youtube.com/watch?v=eA5AtTx3rRI
+- matplotlib.pyplot
 
 https://github.com/jasilva1/Binomial-Options-Pricing-Model/assets/134011187/794e0fc0-ffa9-4f94-9cee-864d36fddc60
 
