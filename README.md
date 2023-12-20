@@ -1,15 +1,13 @@
 # Binomial-Options-Pricing-Model
 
-
+I've uploaded code for both the one-step core model I created, this was simply a starting point and helped me understand exactly what was going on within the model.
+I've also uploaded the code for the multi-step model. When run this allows you to enter a stock ticker symbol, an expiration time frame, number of steps, and strike price. 
 This model uses:
 - numpy
 - yfinance
 - math
 - streamlit
-
-This model is currently only a one-step model, this is only a starting point that does the model calculations. It doesn't currently output or display anything. Print statements can be added to the code to check the calculations.
-
-I'm in the process of making it allow for multiple steps, more user-friendly, and data visualization.
+https://www.youtube.com/watch?v=eA5AtTx3rRI
 
 https://github.com/jasilva1/Binomial-Options-Pricing-Model/assets/134011187/794e0fc0-ffa9-4f94-9cee-864d36fddc60
 
