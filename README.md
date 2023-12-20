@@ -1,7 +1,6 @@
 # Binomial-Options-Pricing-Model
 
-I've uploaded code for both the one-step core model I created, this was simply a starting point and helped me understand exactly what was going on within the model.
-I've also uploaded the code for the multi-step model, ...........................................................
+I've uploaded code for both the one-step core model and the multi-step model. The one-step model was simply a starting point and helped me understand exactly what was going on within the model. The multi-step model builds upon the foundational principles of the one-step model and extends it to a more complex and realistic scenario. The multi-step model allows for a more detailed simulation of option price evolution over time, providing a closer approximation to real-world option pricing dynamics.
 
 User Inputs:
 - Stock Ticker Symbol
@@ -21,6 +20,11 @@ Libraries Used:
 - math
 - streamlit
 - matplotlib.pyplot
+
+Try the model yourself:
+- Download the multi_step_model.py
+- Install streamlit with " pip install streamlit " (If not already installed)
+- Lastly, run with " streamlit run multi_step_model.py "
 
 https://github.com/jasilva1/Binomial-Options-Pricing-Model/assets/134011187/794e0fc0-ffa9-4f94-9cee-864d36fddc60
 
