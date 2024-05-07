@@ -21,6 +21,19 @@ Libraries Used:
 - streamlit
 - matplotlib.pyplot
 
+Functions:
+- get_risk_free_rate(): Calculates the rate of return of an investment with zero risk
+- get_data(): Returns the historical closing prices of the specified ticker symbol over the past year
+- fetch_option_data(): Returns the Options data(Option chain data, calls/puts), Strike Prices, and the current price of the specified ticker symbol
+- up_down_move(): Calculates the upward and downward movement factors (u and d) used in the binomial tree, based on the volatility of the stock and the time step length
+- historical_data(): Calculates the logarithmic returns of the historical closing prices from Yahoo Finance
+- build_binomial_tree(): Constructs a binomial tree for the asset's potential future prices, starting from the current price and applying the calculated up and down factors (u and d) repeatedly for a given number of steps.
+- calculate_call_option_values(): Computes the values of call options at each node of the binomial tree by working backwards from the expiration values, and discounting expected future values based on the risk-free rate
+- calculate_put_option_values(): Calculates the values of the put options similarly to the "calculate_call_option_values" function
+- plot_binomial_tree(): Utilizes matplotlib to build the plot of the binomial tree with x-axis=Steps and y-axis=Price
+- plot_historical_data(): Utilized matplotlib to plot the closing prices of the specified ticker symbol over the past year
+  
+
 Try the model yourself:
 - Download the multi_step_model.py
 - Install streamlit with " pip install streamlit " (If not already installed)
