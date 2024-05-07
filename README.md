@@ -39,6 +39,4 @@ Try the model yourself:
 - Install streamlit with " pip install streamlit " (If not already installed)
 - Lastly, run with " streamlit run multi_step_model.py "
 
-https://github.com/jasilva1/Binomial-Options-Pricing-Model/assets/134011187/794e0fc0-ffa9-4f94-9cee-864d36fddc60
-
 https://github.com/jasilva1/Binomial-Options-Pricing-Model/assets/134011187/2fcb510e-ed61-4c16-a2c9-62ce68b3d3a5
